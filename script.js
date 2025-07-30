@@ -108,3 +108,37 @@ function deleteLast() {
   equation = equation.slice(0, -1);
   updateDisplay();
 }
+
+// Add keyboard support
+document.addEventListener('keydown', function(event) {
+  const key = event.key;
+  
+  // Numbers
+  if (/^[0-9]$/.test(key)) {
+    appendNumber(key);
+  }
+  // Operators
+  else if (['+', '-', '*', '/'].includes(key)) {
+    appendOperator(key);
+  }
+  // Equals (Enter or =)
+  else if (key === 'Enter' || key === '=') {
+    calculate();
+  }
+  // Decimal point
+  else if (key === '.') {
+    appendDecimal();
+  }
+  // Clear (Escape or c)
+  else if (key === 'Escape' || key.toLowerCase() === 'c') {
+    clearDisplay();
+  }
+  // Backspace
+  else if (key === 'Backspace') {
+    deleteLast();
+  }
+  // Percentage
+  else if (key === '%') {
+    calculatePercentage();
+  }
+});
